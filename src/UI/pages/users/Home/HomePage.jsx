@@ -5,6 +5,7 @@ import Navbar from "../../../components/Navbar/NavBar";
 import { ContentManagement } from "./components/ContentForHome";
 import BeerCard from "./components/BeerCards";
 
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
