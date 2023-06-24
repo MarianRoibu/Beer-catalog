@@ -1,61 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import {  SwitchButton, CloseButton, AddPropertyButton, AddPropertyInput, AddPropertyForm,
+  PropertyLabel, PropertyCheckbox, ModalProperty, ModalContent, ModalTitle, ModalHeader, ModalContainer, ModalOverlay } from "../../Styles/ComponentsStyles/SettingsModalStyle";
 
-const ModalOverlay = styled.div`
-z-index: 999;
-  /* Styles for the modal overlay */
-`;
 
-const ModalContainer = styled.div`
-z-index: 999;
-top: 10%;
-position: absolute;
-  /* Styles for the modal container */
-`;
-
-const ModalHeader = styled.div`
-  /* Styles for the modal header */
-`;
-
-const ModalTitle = styled.h2`
-  /* Styles for the modal title */
-`;
-
-const ModalContent = styled.div`
-  /* Styles for the modal content */
-`;
-
-const ModalProperty = styled.div`
-  /* Styles for each modal property */
-`;
-
-const PropertyCheckbox = styled.input`
-  /* Styles for the property checkbox */
-`;
-
-const PropertyLabel = styled.label`
-  /* Styles for the property label */
-`;
-
-const AddPropertyForm = styled.form`
-  /* Styles for the add property form */
-`;
-
-const AddPropertyInput = styled.input`
-  /* Styles for the add property input */
-`;
-
-const AddPropertyButton = styled.button`
-  /* Styles for the add property button */
-`;
-
-const CloseButton = styled.button`
-  /* Styles for the close button */
-`;
-
-const SwitchButton = styled.button`
-  /* Styles for the switch button */
-`;
 const SettingsModal = ({
     displayedProperties,
     onPropertyToggle,
@@ -80,15 +27,28 @@ const SettingsModal = ({
           </ModalHeader>
           <ModalContent>
             <h3>Displayed Properties:</h3>
-            <ModalProperty>
-              <PropertyCheckbox
-                type="checkbox"
-                id="image"
-                checked={displayedProperties.includes("image")}
-                onChange={() => handlePropertyToggle("image")}
-              />
-              <PropertyLabel htmlFor="image">Image</PropertyLabel>
-            </ModalProperty>
+
+
+<ModalProperty>
+  <PropertyCheckbox
+    type="checkbox"
+    id="image"
+    checked={displayedProperties.includes("image") }
+    onChange={() => handlePropertyToggle("image")? false : true}
+  />
+  <PropertyLabel htmlFor="image">Image</PropertyLabel>
+</ModalProperty>
+
+<ModalProperty>
+  <PropertyCheckbox
+    type="checkbox"
+    id="tagline"
+    checked={displayedProperties.includes("tagline")}
+    onChange={() => handlePropertyToggle("tagline")}
+  />
+  <PropertyLabel htmlFor="tagline">Tagline</PropertyLabel>
+</ModalProperty>
+
             <ModalProperty>
               <PropertyCheckbox
                 type="checkbox"
@@ -98,6 +58,8 @@ const SettingsModal = ({
               />
               <PropertyLabel htmlFor="name">Name</PropertyLabel>
             </ModalProperty>
+
+
             <ModalProperty>
               <PropertyCheckbox
                 type="checkbox"
@@ -128,11 +90,6 @@ const SettingsModal = ({
               />
               <PropertyLabel htmlFor="description">Description</PropertyLabel>
             </ModalProperty>
-            {/* Add more properties as needed */}
-            <h3>View:</h3>
-          <SwitchButton onClick={handleViewSwitch}>
-            {isCardView ? "Switch to Table View" : "Switch to Card View"}
-          </SwitchButton>
           </ModalContent>
         </ModalContainer>
       </ModalOverlay>

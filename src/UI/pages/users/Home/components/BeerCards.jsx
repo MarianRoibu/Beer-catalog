@@ -1,148 +1,17 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import {
+  ButtonSettings, ButtonFavorite, Button, LikeButton, HeartIcon, FavoriteButtonContainer, CardButtonContainer,
+  ButtonContainer, ButtonContainerFilters, Container, ContentContainer, PostContainer, ButtonFilters, BeerImage, BeerName, BeerDetails
+} from "../../../../Styles/HomePageStyles/BeerCardsStyle";
+import { Table, Th, Td, ImageWrapper } from "../../../../Styles/HomePageStyles/BeerTableStyle";
+import { FaChevronLeft, FaChevronRight, FaTable, FaThLarge, FaHeart, FaEye } from "react-icons/fa";
 import fetchAllBeers from "../../../../../api/getAll";
 import SearchBar from "../../../../components/SearchBar/SearchBar";
 import Modal from "../../../../components/InformationModal/Modal";
 import SettingsModal from "../../../../components/SettingsModal/SettingsModal";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  height: 100vh;
-  margin-bottom: 10rem;
-  background-color: #ffffff;
-`;
-
-const ContentContainer = styled.div`
-  display: grid;
-  top: 70%;
-  position: absolute;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-  padding-bottom: 10vh;
-  z-index: 2;
-`;
-
-const PostContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-  }
-`;
-
-const BeerImage = styled.img`
-  width: 20vh;
-  height: 10vh;
-  object-fit: contain;
-  border-radius: 5%;
-  margin-bottom: 10px;
-`;
-
-const BeerName = styled.span`
-  font-weight: bold;
-  margin-bottom: 5px;
-`;
-
-const BeerDetails = styled.p`
-  margin-bottom: 10px;
-  color: #1d16169f;
-`;
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: -120vh;
-  
-  z-index: 1000;
-`;
-
-const ButtonContainerFilters = styled.div`
-  
-  margin-top: -120vh;
-  
-  z-index: 1000;
-`;
+import GearButtonComponent from "../../../../components/Buttons/GearButton";
 
 
-const CardButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: -120vh;
-  z-index: 100;
-`;
-const FavoriteButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: -120vh;
-  z-index: 100;
-`;
-
-const Button = styled.button`
-  padding: 8px 12px;
-  margin: 0 5px;
-  background-color: #ccc;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  margin-left: 50vh;
-  margin-right: 50vh;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: #999;
-  }
-`;
-
-const ButtonFavorite = styled.button`
-  padding: 8px 12px;
-  margin: 0 5px;
-  background-color: #ccc;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  margin-left: 50vh;
-  margin-right: 50vh;
-  z-index: 9999;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: #999;
-  }
-`;
-const ButtonSettings = styled.button`
-  padding: 8px 12px;
-  margin: 0 5px;
-  background-color: #ccc;
-  border: none;
-  border-radius: 4px;
-  color: #fff;
-  margin-left: 50vh;
-  margin-right: 50vh;
-  z-index: 9999;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-
-  &:hover {
-    background-color: #999;
-  }
-`;
-const Table = styled.table`
-margin-top: 120rem;
-z-index: 999;
-`
 
 const BeerCard = () => {
   const [beers, setBeers] = useState([]);
@@ -150,10 +19,9 @@ const BeerCard = () => {
   const [startIndex, setStartIndex] = useState(0);
   const [selectedBeer, setSelectedBeer] = useState(null);
   const [displayedProperties, setDisplayedProperties] = useState([
+    "image",
     "name",
-    "abv",
-    "ibu",
-    "description",
+    "tagline",
   ]);
   const [showSettingsModal, setShowSettingsModal] = useState(false);
   const [isTableView, setIsTableView] = useState(false);
@@ -239,134 +107,137 @@ const BeerCard = () => {
     <Container>
       {!isTableView && (
         <>
-          {!filteredAndBookmarkedBeers.length && (
-            <ContentContainer>
-              {mainBeers.map((beer) => (
-                <PostContainer key={beer.id} onClick={() => handleCardClick(beer)}>
-                  {displayedProperties.includes("image") && (
-                    <BeerImage src={beer.image_url} alt="Beer" />
-                  )}
-                  {displayedProperties.includes("name") && (
-                    <BeerName>{beer.name}</BeerName>
-                  )}
-                  {displayedProperties.includes("abv") && (
-                    <BeerDetails>ABV: {beer.abv}</BeerDetails>
-                  )}
-                  {displayedProperties.includes("ibu") && (
-                    <BeerDetails>IBU: {beer.ibu}</BeerDetails>
-                  )}
-                  {displayedProperties.includes("description") && (
-                    <BeerDetails>{beer.description}</BeerDetails>
-                  )}
-                  <Button
-                    onClick={() => handleBookmark(beer.id)}
-                    active={favorites.includes(beer.id)}
-                  >
-                    {favorites.includes(beer.id) ? "Remove Favorite" : "Add Favorite"}
-                  </Button>
-                </PostContainer>
-              ))}
-            </ContentContainer>
-          )}
-          <SearchBar beers={beers} setFilteredBeers={handleSearch} />
           {!!filteredAndBookmarkedBeers.length && (
             <ContentContainer>
               {filteredAndBookmarkedBeers.map((beer) => (
-                <PostContainer key={beer.id} onClick={() => handleCardClick(beer)}>
-                  {displayedProperties.includes("image") && (
-                    <BeerImage src={beer.image_url} alt="Beer" />
-                  )}
-                  {displayedProperties.includes("name") && (
-                    <BeerName>{beer.name}</BeerName>
-                  )}
-                  {displayedProperties.includes("abv") && (
-                    <BeerDetails>ABV: {beer.abv}</BeerDetails>
-                  )}
-                  {displayedProperties.includes("ibu") && (
-                    <BeerDetails>IBU: {beer.ibu}</BeerDetails>
-                  )}
-                  {displayedProperties.includes("description") && (
-                    <BeerDetails>{beer.description}</BeerDetails>
-                  )}
-                  <button
+                <PostContainer>
+                  <div key={beer.id} onClick={() => handleCardClick(beer)}>
+                    {displayedProperties.includes("image") && (
+                      <BeerImage src={beer.image_url} alt="Beer" />
+                    )} <br />
+                    {displayedProperties.includes("name") && (
+                      <BeerName>{beer.name}</BeerName>
+                    )}
+                    {displayedProperties.includes("tagline") && (
+                      <BeerDetails>Tagline: {beer.tagline}</BeerDetails>
+                    )}
+                    {displayedProperties.includes("abv") && (
+                      <BeerDetails>ABV: {beer.abv}</BeerDetails>
+                    )}
+                    {displayedProperties.includes("ibu") && (
+                      <BeerDetails>IBU: {beer.ibu}</BeerDetails>
+                    )}
+                    {displayedProperties.includes("description") && (
+                      <BeerDetails>{beer.description}</BeerDetails>
+                    )}
+                  </div>
+                  <LikeButton
                     onClick={() => handleBookmark(beer.id)}
-                    active={favorites.includes(beer.id)}
+                    className={favorites.includes(beer.id) ? 'active' : ''}
                   >
-                    {favorites.includes(beer.id) ? "Remove Favorite" : "Add Favorite"}
-                  </button>
+                    <HeartIcon />
+                    {favorites.includes(beer.id)}
+                  </LikeButton>
                 </PostContainer>
               ))}
             </ContentContainer>
           )}
         </>
       )}
+      <SearchBar beers={beers} setFilteredBeers={handleSearch} />
 
       <ButtonContainer>
         <Button onClick={handlePrevious} disabled={startIndex === 0}>
-          Previous
+          <FaChevronLeft />
         </Button>
         <Button onClick={handleNext} disabled={startIndex + 12 >= beers.length}>
-          Next
+          <FaChevronRight />
         </Button>
       </ButtonContainer>
-<ButtonContainerFilters>
-                {!isTableView && (
-          <ButtonFavorite onClick={() => setIsTableView(true)}>Switch to Table View</ButtonFavorite>
-        )}
+
+      <ButtonContainerFilters>
         {isTableView && (
-          <ButtonFavorite onClick={() => setIsTableView(false)}>Switch to Card View</ButtonFavorite>
+          <ButtonFilters onClick={() => setIsTableView(false)}>
+            <FaThLarge style={{ marginRight: '5px' }} />
+            Switch
+          </ButtonFilters>
         )}
-        <ButtonFavorite onClick={() => setShowFavorites(!showFavorites)}>
-          {showFavorites ? "Show All" : "Show Favorites"}
-        </ButtonFavorite>          
-      <ButtonSettings onClick={toggleSettingsModal}>Settings</ButtonSettings>
+        {!isTableView && (
+          <ButtonFilters onClick={() => setIsTableView(true)}>
+            <FaTable style={{ marginRight: '5px' }} />
+            Switch
+          </ButtonFilters>
+        )}
+        <ButtonFilters onClick={() => setShowFavorites(!showFavorites)}>
+          {showFavorites ? (
+            <>
+              <FaEye style={{ marginRight: '5px' }} />
+              All
+            </>
+          ) : (
+            <>
+              <FaHeart style={{ marginRight: '5px' }} />
+              Favorites
+            </>
+          )}
+        </ButtonFilters>
+
+        <ButtonSettings onClick={toggleSettingsModal}>
+          <GearButtonComponent />
+        </ButtonSettings>
       </ButtonContainerFilters>
-<CardButtonContainer>
-  </CardButtonContainer>
 
 
+      {/* <CardButtonContainer>
+  </CardButtonContainer> */}
 
-   
-      
+
 
       {isTableView && (
-              <Table>
-          
+        <Table>
           <thead>
             <tr>
-              {displayedProperties.includes("image") && <th>Image</th>}
-              {displayedProperties.includes("name") && <th>Name</th>}
-              {displayedProperties.includes("abv") && <th>ABV</th>}
-              {displayedProperties.includes("ibu") && <th>IBU</th>}
-              {displayedProperties.includes("description") && <th>Description</th>}
-              <th>Favorite</th>
+              {displayedProperties.includes("image") && <Th>Image</Th>}
+              {displayedProperties.includes("name") && <Th>Name</Th>}
+              {displayedProperties.includes("tagline") && <Th>tagline</Th>}
+              {displayedProperties.includes("abv") && <Th>ABV</Th>}
+              {displayedProperties.includes("ibu") && <Th>IBU</Th>}
+              {displayedProperties.includes("description") && <Th>Description</Th>}
+              <Th>Favorite</Th>
             </tr>
           </thead>
           <tbody>
             {filteredAndBookmarkedBeers.map((beer) => (
-              <tr key={beer.id}>
+              <tr>
+
                 {displayedProperties.includes("image") && (
-                  <td>
-                    <img src={beer.image_url} alt="Beer" />
-                  </td>
+                  <Td key={beer.id} onClick={() => handleCardClick(beer)}>
+                    <ImageWrapper>
+                      <img src={beer.image_url} alt="Beer" />
+                    </ImageWrapper>
+                  </Td>
                 )}
-                {displayedProperties.includes("name") && <td>{beer.name}</td>}
-                {displayedProperties.includes("abv") && <td>{beer.abv}</td>}
-                {displayedProperties.includes("ibu") && <td>{beer.ibu}</td>}
-                {displayedProperties.includes("description") && <td>{beer.description}</td>}
-                <td>
-                  <button
+                {displayedProperties.includes("name") && <Td>{beer.name}</Td>}
+                {displayedProperties.includes("tagline") && <Td>{beer.tagline}</Td>}
+                {displayedProperties.includes("abv") && <Td>{beer.abv}</Td>}
+                {displayedProperties.includes("ibu") && <Td>{beer.ibu}</Td>}
+                {displayedProperties.includes("description") && <Td>{beer.description}</Td>}
+
+                <Td>
+                  <LikeButton
                     onClick={() => handleBookmark(beer.id)}
-                    style={{ color: favorites.includes(beer.id) ? "red" : "black" }}
+                    className={favorites.includes(beer.id) ? 'active' : ''}
                   >
-                    {favorites.includes(beer.id) ? "Remove" : "Favorite"}
-                  </button>
-                </td>
+                    <HeartIcon />
+                    {favorites.includes(beer.id)}
+                  </LikeButton>
+
+                </Td>
               </tr>
             ))}
           </tbody>
-        </Table >
-        
+        </Table>
+
       )}
 
 
@@ -382,5 +253,5 @@ const BeerCard = () => {
     </Container>
   );
 };
-  
-  export default BeerCard;
+
+export default BeerCard;
