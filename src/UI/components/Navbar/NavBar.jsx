@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <>
       <GlobalStyles /> 
-      <NavbarContainer style={{ margin: 0 }}>
+      <NavbarContainer >
         <NavLinks>
         </NavLinks>
       </NavbarContainer>
