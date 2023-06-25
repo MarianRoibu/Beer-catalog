@@ -197,6 +197,7 @@ const ButtonSettings = styled.button`
   border-radius: 4px;
   color: #fff;
   margin-left: 70vh;
+  margin-top: -1vh;
   cursor: pointer;
   transition: background-color 0.2s ease;
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../../components/Navbar/NavBar";
-import { ContentManagement } from "./components/ContentForHome";
 import BeerCard from "./components/BeerCards";
 import { Container, ContainerMain, Image, ScrollToTopButton } from "../../../Styles/HomePageStyles/HomePageStyle";
 import styled from "styled-components";

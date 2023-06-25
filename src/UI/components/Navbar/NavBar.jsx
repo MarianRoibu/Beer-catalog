@@ -1,18 +1,16 @@
 import React from "react";
-import { Button, NavLink, NavLinks, Logo, NavbarContainer, } from "../../Styles/ComponentsStyles/NavbarStyle";
-
-
-
+import { GlobalStyles, Button, NavLink, NavLinks, Logo, NavbarContainer, } from "../../Styles/ComponentsStyles/NavbarStyle";
 
 const Navbar = () => {
 
 
   return (
     <>
-    <NavbarContainer>
-      <NavLinks>
-      </NavLinks>
-    </NavbarContainer>
+      <GlobalStyles /> 
+      <NavbarContainer style={{ margin: 0 }}>
+        <NavLinks>
+        </NavLinks>
+      </NavbarContainer>
     </>
   );
 };

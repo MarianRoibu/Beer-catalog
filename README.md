@@ -1,18 +1,47 @@
-# Getting Started with Create React App
+# Beer Catalog App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Beer Catalog App is a web application that helps you find the perfect beer for you and your meals. It allows you to search for beers by their name or by foods that pair well with them. The app provides detailed information about each beer, and you can customize the displayed properties according to your preferences. Whether you prefer a card view or a table view, the app offers a seamless browsing experience. Additionally, you can create a favorites catalog to save your preferred beers for quick access.
+
+## Features
+
+- Search: Easily search for beers by their name or foods that pair well with them.
+- Beer Details: Click on a beer to view its detailed information, including ABV (Alcohol by Volume), IBU (International Bitterness Units), and description.
+- Settings: Customize the properties displayed in the catalog by adding or removing them. Simply click the settings button and select the desired properties.
+- View Options: Switch between card view and table view to browse the beers in your preferred layout.
+- Favorites Catalog: Create a catalog of your favorite beers and access them quickly by clicking the favorites button.
+- Mobile-Friendly: The app is designed to be mobile-friendly, allowing you to take your beer catalog with you wherever you go.
+
+## Installation
+
+Follow these steps to set up and run the Beer Catalog App locally:
+
+1. Clone the repository:
+git clone [repository-url]
+
+
+2. Install dependencies:
+cd [project-folder]
+npm install
+
+
+## Usage
+
+To start the app locally, use the following command:
+npm start
+
+Copy code
+
+This will start the development server and compile the project. Open a web browser and visit `http://localhost:3000` to access the Beer Catalog App.
+
+## Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to open an issue or submit a pull request.
+
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
 ### `npm test`
 

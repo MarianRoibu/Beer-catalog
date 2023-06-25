@@ -46,6 +46,8 @@ const ModalTitle = styled.h2`
   margin: 0;
 `;
 
+
+
 const ModalContent = styled.div`
   padding: 16px;
 `;
@@ -91,14 +93,23 @@ const AddPropertyButton = styled.button`
 `;
 
 const CloseButton = styled.button`
-  background-color: transparent;
+  font-size: 1rem;
+  padding: 0.5rem;
+  border-radius: 50%;
   border: none;
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  font-size: 18px;
-  color: #333;
+  background-color: #ff4040;
+  color: #ffffff;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+
+  &:hover {
+    background-color: #ff0000;
+  }
 `;
 
 const SwitchButton = styled.button`

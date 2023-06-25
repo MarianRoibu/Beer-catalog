@@ -158,13 +158,13 @@ const BeerCard = () => {
       <ButtonContainerFilters>
         {isTableView && (
           <ButtonFilters onClick={() => setIsTableView(false)}>
-            <FaThLarge style={{ marginRight: '5px' }} />
+            <FaThLarge style={{ marginRight: '5px' }} /> <br/>
             Switch
           </ButtonFilters>
         )}
         {!isTableView && (
           <ButtonFilters onClick={() => setIsTableView(true)}>
-            <FaTable style={{ marginRight: '5px' }} />
+            <FaTable style={{ marginRight: '5px' }} /> <br/>
             Switch
           </ButtonFilters>
         )}
@@ -186,13 +186,6 @@ const BeerCard = () => {
           <GearButtonComponent />
         </ButtonSettings>
       </ButtonContainerFilters>
-
-
-      {/* <CardButtonContainer>
-  </CardButtonContainer> */}
-
-
-
       {isTableView && (
         <Table>
           <thead>

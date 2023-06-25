@@ -1,4 +1,11 @@
 import styled from "styled-components";
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    margin: 0;
+  }
+`;
 
 const NavbarContainer = styled.nav`
   display: flex;
@@ -6,11 +13,8 @@ const NavbarContainer = styled.nav`
   align-items: center;
   background-color: #d3d6db; 
   height: 50px; 
-width: auto;
-  /* @media (max-width: 480px) {
-    max-height: 5vh;
-    margin-right: 7.4vh;
-  } */
+  width: auto;
+  margin: 0;
 `;
 
 const Logo = styled.a`
@@ -82,4 +86,4 @@ const Button = styled.button`
   }
 `;
 
-export { Button, NavLink, NavLinks, Logo, NavbarContainer,  }
+export { GlobalStyles, Button, NavLink, NavLinks, Logo, NavbarContainer, }
